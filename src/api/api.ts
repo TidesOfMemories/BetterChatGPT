@@ -18,23 +18,10 @@ export const getChatCompletion = async (
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
 
-    const modelmapping: Partial<Record<ModelOptions, string>> = {
-      'gpt-3.5-turbo': 'gpt-35-turbo',
-      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
-      'gpt-3.5-turbo-1106': 'gpt-35-turbo-1106',
-      'gpt-3.5-turbo-0125': 'gpt-35-turbo-0125',
-      'gpt-4-32k': 'gpt4-4-32k',
-    };
-
-    const model = modelmapping[config.model] || config.model;
-
     // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion =
-      model === 'gpt-4' || model === 'gpt-4-32k'
-        ? '2023-07-01-preview'
-        : '2024-02-15-preview';
-
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
+    const path = `openai/deployments/gpt4-4-32k/chat/completions?api-version=2024-02-15-preview`;
+    console.log(path)
+    console.log(endpoint)
 
     if (!endpoint.endsWith(path)) {
       if (!endpoint.endsWith('/')) {
@@ -75,20 +62,9 @@ export const getChatCompletionStream = async (
   if (isAzureEndpoint(endpoint) && apiKey) {
     headers['api-key'] = apiKey;
 
-    const modelmapping: Partial<Record<ModelOptions, string>> = {
-      'gpt-3.5-turbo': 'gpt-35-turbo',
-      'gpt-3.5-turbo-16k': 'gpt-35-turbo-16k',
-      'gpt-4-32k': 'gpt4-4-32k',
-    };
-
-    const model = modelmapping[config.model] || config.model;
-
-    // set api version to 2023-07-01-preview for gpt-4 and gpt-4-32k, otherwise use 2023-03-15-preview
-    const apiVersion =
-      model === 'gpt-4' || model === 'gpt-4-32k' || model == 'gpt4-4-32k'
-        ? '2024-02-15-preview'
-        : '2023-07-01-preview';
-    const path = `openai/deployments/${model}/chat/completions?api-version=${apiVersion}`;
+    const path = `openai/deployments/gpt4-4-32k/chat/completions?api-version=2024-02-15-preview`;
+    console.log(path)
+    console.log(endpoint)
 
     if (!endpoint.endsWith(path)) {
       if (!endpoint.endsWith('/')) {
