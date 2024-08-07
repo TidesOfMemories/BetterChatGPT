@@ -23,7 +23,7 @@ export const getChatCompletion = async (
     console.log(path)
     console.log(endpoint)
 
-    if (!endpoint.endsWith(path)) {
+    if (!endpoint.endsWith(path) && !endpoint.includes('api-version')) {
       if (!endpoint.endsWith('/')) {
         endpoint += '/';
       }
@@ -66,7 +66,7 @@ export const getChatCompletionStream = async (
     console.log(path)
     console.log(endpoint)
 
-    if (!endpoint.endsWith(path)) {
+    if (!endpoint.endsWith(path) && !endpoint.includes('api-version')) {
       if (!endpoint.endsWith('/')) {
         endpoint += '/';
       }
